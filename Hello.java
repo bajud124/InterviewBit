@@ -1,9 +1,6 @@
 import java.util.ArrayList;
 
-import DSStack.TrapingrainWater;
-import StackInterviewBit.RedundantBraces;
-import StackInterviewBit.SimplifyDirectoryPath;
-import StackInterviewBit.SlidingWindowMaximum;
+import StackInterviewBit.EvaluateExpression;
 
 class Hello {
     public static void main(String arges[]) {
@@ -11,14 +8,13 @@ class Hello {
         ArrayList<Integer> array_list = new ArrayList<Integer>();
         for (int i = 0; i < arr.length; i++)
             array_list.add((arr[i]));
-        int[] arrB = {4,2,0,3,2,5 };
-        ArrayList<Integer> array_listB = new ArrayList<Integer>();
-        for (int i = 0; i < arrB.length; i++)
-            array_listB.add((arrB[i]));
-        TrapingrainWater t = new TrapingrainWater();
-        SlidingWindowMaximum s = new SlidingWindowMaximum();
-        SimplifyDirectoryPath d = new SimplifyDirectoryPath();
-        RedundantBraces r = new RedundantBraces();
-        System.out.println(r.braces("(a/b)+(b*d)+(a*a)+a"));
+        ArrayList<String> array_listB = new ArrayList<String>();
+        // for (int i = 0; i < arrB.length; i++)
+        //     array_listB.add((arrB[i]));
+        String[] str = { "5", "1", "2", "+", "4", "*", "+", "3", "-" };
+        for (int i = 0; i < str.length; i++)
+            array_listB.add((str[i]));
+        EvaluateExpression e = new EvaluateExpression();
+        System.out.println(e.evalRPN(array_listB));
     }
 }
