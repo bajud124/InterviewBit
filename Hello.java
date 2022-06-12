@@ -1,20 +1,47 @@
-import java.util.ArrayList;
 
-import StackInterviewBit.EvaluateExpression;
+// { Driver Code Starts
+//Initial Template for Java
+import java.io.*;
+import java.util.*;
 
 class Hello {
-    public static void main(String arges[]) {
-        int[] arr = { 3, 1, 2, 1, 3, 1, 2, 2, 1, 1, 2, 3, 3, 1, 3, 3, 3, 2, 3, 3, 1, 1, 1, 3, 3, 1, 3, 1, 3, 3, 1, 1, 3, 2, 2, 3, 1, 2, 1, 3, 3, 3, 2, 1, 1, 2, 1 };
-        ArrayList<Integer> array_list = new ArrayList<Integer>();
-        for (int i = 0; i < arr.length; i++)
-            array_list.add((arr[i]));
-        ArrayList<String> array_listB = new ArrayList<String>();
-        // for (int i = 0; i < arrB.length; i++)
-        //     array_listB.add((arrB[i]));
-        String[] str = { "5", "1", "2", "+", "4", "*", "+", "3", "-" };
-        for (int i = 0; i < str.length; i++)
-            array_listB.add((str[i]));
-        EvaluateExpression e = new EvaluateExpression();
-        System.out.println(e.evalRPN(array_listB));
+    public static void main(String[] args) {
+        Solution s = new Solution();
+        int[] nums = {4,3,11};
+        int [] res = s.maxSlidingWindow(nums, 3);
+        System.out.println(res);
+    }
+}
+
+class Solution {
+    public int[] maxSlidingWindow(int[] nums, int k) {
+        if (k == 1) {
+            return nums;
+        }
+        int[] res = new int[nums.length - k + 1];
+        ArrayDeque<Integer> dq = new ArrayDeque<>();
+        dq.offerFirst(nums[0]);
+        for (int i = 1; i < k; i++) {
+            if (dq.peekLast() <= nums[i]) {
+                if (dq.peekLast() < nums[i])
+                    dq.pollLast();
+                dq.offerLast(nums[i]);
+            } else {
+                dq.offerLast(nums[i]);
+            }
+        }
+        int i = 0;
+        res[i++] = dq.peekFirst();
+        for (int l = 0, r = k; r < nums.length; l++, r++) {
+            if (dq.peekFirst() == nums[l]) {
+                dq.pollFirst();
+            }
+            while (!dq.isEmpty() && dq.peekLast() < nums[r]) {
+                dq.pollLast();
+            }
+            dq.offerLast(nums[r]);
+            res[i++] = dq.peekFirst();
+        }
+        return res;
     }
 }
